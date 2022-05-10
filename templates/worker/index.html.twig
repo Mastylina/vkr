@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Worker index{% endblock %}
+
+{% block body %}
+    <h1>Worker index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>NumberPhone</th>
+                <th>Photo</th>
+                <th>Surname</th>
+                <th>Name</th>
+                <th>Patronymic</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for worker in workers %}
+            <tr>
+                <td>{{ worker.id }}</td>
+                <td>{{ worker.email }}</td>
+                <td>{{ worker.roles ? worker.roles|json_encode : '' }}</td>
+                <td>{{ worker.password }}</td>
+                <td>{{ worker.numberPhone }}</td>
+                <td>{{ worker.photo }}</td>
+                <td>{{ worker.surname }}</td>
+                <td>{{ worker.name }}</td>
+                <td>{{ worker.patronymic }}</td>
+                <td>
+                    <a href="{{ path('app_worker_show', {'id': worker.id}) }}">show</a>
+                    <a href="{{ path('app_worker_edit', {'id': worker.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_worker_new') }}">Create new</a>
+{% endblock %}
